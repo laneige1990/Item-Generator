@@ -595,7 +595,7 @@
                                         <div class="col">
                                             <label class="w-100">Rarity</label>
                                             <div class="form-check form-check-inline">
-                                                <select class="form-control col" name="gen--rarity" id="rarity">
+                                                <select class="form-control col" name="gen--rarity" id="gen--rarity">
                                                     <option it_type="armour" value="58">Broken</option>
                                                     <option it_type="armour" value="59">Common</option>
                                                     <option it_type="armour" value="60">Uncommon</option>
