@@ -352,7 +352,6 @@
                                 <div class="col-md-6 ">
                                     <label for="firstName">Item Type</label>
                                     <select class="form-control col" name="gen--type" id="img_type2">
-                                        <option it_type="armour" value="">Armour</option>
                                         <option it_type="armour" value="1"> - Plate</option>
                                         <option it_type="armour" value="2"> - Mail</option>
                                         <option it_type="armour" value="3"> - Leather</option>
@@ -377,7 +376,7 @@
                                         <option it_type="weapon" value="30"> - Staff</option>
                                         <option it_type="weapon" value="31"> - Wand</option>
                                     </select>
-                                    <select style="display:none;" class="form-control col mt-3" name="gen--type_sub2"
+                                    <select style="display:none;" class="form-control col mt-3" name="gen--type_sub"
                                         id="img_type_sub2">
                                         <option it_type="armour" value="6">Head</option>
                                         <option it_type="armour" value="7">Body</option>

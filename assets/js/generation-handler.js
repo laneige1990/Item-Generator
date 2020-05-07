@@ -29,14 +29,28 @@ document.getElementById("gen--submit").addEventListener("click", function (event
     });
     // rarity
     rarity = document.getElementById("gen--rarity").value;
-    attributes.push(rarity);
+    formData.append("gen--rarity", rarity);
     formData.append("gen--attributes", attributes);
     // Display the key/value pairs
-    for (var pair of formData.entries()) {
-        console.log(pair[0]+ ', ' + pair[1]); 
-    }
+    sendDataAjax(formData);
 });
 
 function generate_name(){
     return "Generated Name";
+}
+
+function sendDataAjax(formData){
+    var request = new XMLHttpRequest();
+    request.open('POST', 'action.php?r=gen', /* async = */ true);
+    request.send(formData);
+    request.onreadystatechange = function () {
+        if (request.readyState == 4) {
+          if (request.status == 200) {
+              var data = request.responseText;
+              console.log(data);
+          }
+        }
+    };
+  
+   
 }
