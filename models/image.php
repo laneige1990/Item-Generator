@@ -10,7 +10,7 @@
         }
 
         private function saveImage(){
-            $target_dir = IMG_PATH . "/items";
+            $target_dir = "assets/images/items";
             $target_file = $target_dir . basename($_FILES["ig--fileToUpload"]["name"]);
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
             // Check if image file is a actual image or fake image

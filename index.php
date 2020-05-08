@@ -39,7 +39,7 @@
 </div>
     <div class="container">
         <div class="py-5 text-center">
-            <img class="d-block mx-auto mb-4" src="<?php echo IMG_PATH;?>\Raden.png" alt="" width="85" height="85">
+            <img class="d-block mx-auto mb-4" src="assets\images\raden.png" alt="" width="85" height="85">
             <h2>Adventures of Raden - Item Generator</h2>
             <p class="lead">This tool will generate items based on assets in database.</p>
         </div>
