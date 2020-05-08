@@ -11,16 +11,20 @@
 
        
         $this->getItemsByAttributes($connection, $item_ids);
+
        // echo "<script>console.log(".json_encode($temp_image_datas).");</script>";
         // insert into image_meta table
        
     }
 
     private function getItemsByAttributes($connection, $item_ids){
+       
         if ($_POST['gen--attributes'] == "")
+         print_r( $item_ids);
             return $item_ids;  
 
         $gen_attributes = $_POST['gen--attributes'];
+        
         $gen_attributes = explode(',',$gen_attributes);
         
         foreach($item_ids as $item_id){ // each image

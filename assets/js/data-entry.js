@@ -1,4 +1,4 @@
-document.addEventListener('click', function (event) {
+document.addEventListener('change', function (event) {
    if (event.target.matches('#img_type')) {
       dropDownListener(event, 'img_type_sub');
    }
@@ -21,10 +21,14 @@ function dropDownListener(event, subtype){
             else if(element.text == "Accessory"){
                element.value = "8";
             }
+            options.style.visibility = 'visible';
             options.style.display = 'block';
+
          }else{
             element.value = "";
+            options.style.visibility = 'hidden';
             options.style.display = 'none';
+
          }
       });
 }
