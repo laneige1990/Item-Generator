@@ -17,7 +17,7 @@
             if(isset($_POST["submit"])) {
                 $check = getimagesize($_FILES["ig--fileToUpload"]["tmp_name"]);
                 if($check !== false) {
-                    echo "File is an image - " . $check["mime"] . "." . "<br>";
+               //     echo "File is an image - " . $check["mime"] . "." . "<br>";
                 } else {
                     echo "File is not an image." . "<br>";
                     return;
@@ -27,7 +27,7 @@
                     return;
                 }
                 if (move_uploaded_file($_FILES["ig--fileToUpload"]["tmp_name"], $target_file)) {
-                    echo "The file ". basename( $_FILES["ig--fileToUpload"]["name"]). " has been uploaded." . "<br>";
+                //    echo "The file ". basename( $_FILES["ig--fileToUpload"]["name"]). " has been uploaded." . "<br>";
                 } else {
                     echo "Sorry, there was an error uploading your file." . "<br>";
                 }
@@ -44,7 +44,7 @@
             $sql = "INSERT INTO image_meta (image_url) VALUES ('$target_file')";
             if ($connection->query($sql)) {
                 $last_id = $connection->insert_id;
-                echo "New record created successfully. ID is: " . $last_id . "<br>";
+            //    echo "New record created successfully. ID is: " . $last_id . "<br>";
             } else {
                 echo "Error: " . $sql . "<br>" . $connection->error . "<br>";
             }
@@ -56,7 +56,7 @@
                 $sql = "INSERT INTO image_attributes (img_id, attribute_id) VALUES ('$last_id', '$attribute')";
                 if ($connection->query($sql) === TRUE) {
                     $current_id = $connection->insert_id;
-                    echo "New record created successfully. ID is: " . $current_id . "<br>";
+               //     echo "New record created successfully. ID is: " . $current_id . "<br>";
                 } else {
                     echo "Error: " . $sql . "<br>" . $connection->error . "<br>";
                 }
