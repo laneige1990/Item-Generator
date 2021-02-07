@@ -336,7 +336,7 @@
             </div>
             <div class="tab-pane fade" id="item-generation" role="tabpanel" aria-labelledby="data-entry">
                 <div class="row mt-2">
-                    <div class="col-md-8 order-md-1">
+                    <div class="col-md-9 order-md-1">
                         <h4 class="mb-3">Item parameters</h4>
                         <form class="needs-validation" action="action.php" method="POST" novalidate>
                             <div class="row">
@@ -358,7 +358,7 @@
                                         <option it_type="armour" value="4"> - Robes</option>
                                         <option it_type="shield" value="5"> - Shield</option>
                                         <option it_type="weapon" value="">Weapon</option>
-                                        <option it_type="weapon" value="32"> - 1h Sword</option>
+                                        <option it_type="weapon" value="32" selected > - 1h Sword</option>
                                         <option it_type="weapon" value="33"> - 2h Sword</option>
                                         <option it_type="weapon" value="18"> - 1h Axe</option>
                                         <option it_type="weapon" value="19"> - 2h Axe</option>
@@ -378,6 +378,7 @@
                                     </select>
                                     <select style="display:none;" class="form-control col mt-3" name="gen--type_sub"
                                         id="img_type_sub2">
+                                        <option it_type="armour" value=""></option>
                                         <option it_type="armour" value="6">Head</option>
                                         <option it_type="armour" value="7">Body</option>
                                         <option it_type="armour" value="8">Accessory</option>
@@ -388,7 +389,7 @@
                                     <label for="lastName">Level</label>
                                     <div class="row">
                                         <div class="col">
-                                            <input type="number" class="form-control" id="gen--level" placeholder="Level"
+                                            <input type="number" value="10" class="form-control" id="gen--level" placeholder="Level"
                                                 required>
                                         </div>
                                     </div>
@@ -596,7 +597,7 @@
                                             <div class="form-check form-check-inline">
                                                 <select class="form-control col" name="gen--rarity" id="gen--rarity">
                                                     <option it_type="armour" value="58">Broken</option>
-                                                    <option it_type="armour" value="59">Common</option>
+                                                    <option it_type="armour" value="59" selected>Common</option>
                                                     <option it_type="armour" value="60">Uncommon</option>
                                                     <option it_type="armour" value="61">Rare</option>
                                                     <option it_type="armour" value="62">Epic</option>
@@ -614,16 +615,30 @@
                                 </div>
                             </div>
                             </div>
-                            <div class="col-md-4 order-md-2 mb-4">
+                            <div class="col-md-3 order-md-2 mb-4">
                                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                                     <span class="text-muted">Your generated item.</span>
                                 </h4>
                                 <ul class="list-group mb-3">
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                        <div>
-                                            <h6 class="my-0">Item name</h6>
-                                            <small class="text-muted">Brief description</small>
+                                    <li class="list-group-item d-flex justify-content-between flex-wrap lh-condensed">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1 ">Weapon Name</h6>
+                                            <img width="24px" height="24px" id="fin-item_img">
+
                                         </div>
+                                        <p id="fin-item_name" class="mb-1"></p>
+                                        <hr class="w-100"/>
+                                        <h6 class="mb-1 w-100">Elements</h6>
+                                        <div id="fin-elements"></div>
+                                        <hr class="w-100"/>
+                                        <h6 class="mb-1 w-100">States</h6>
+                                        <div id="fin-states"></div>
+                                        <hr class="w-100"/>
+                                        <h6 class="mb-1 w-100">Stats</h6>
+                                        <div id="fin-stats" class="w-100"></div>
+                                        <hr class="w-100"/>
+                                        <h6 class="mb-1 w-100">Attack</h6>
+                                        <div id="fin-atkdef" class="w-100"></div>
                                     </li>
 
                                 </ul>

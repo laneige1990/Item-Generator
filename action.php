@@ -4,7 +4,7 @@ require_once('loader.php');
 if (isset($_GET['r'])){
     require_once('models/item.php');
     new Item();
-    die(print_r($_POST));
+//    die(print_r($_POST));
 }else{
     // register image
     require_once('models/image.php');

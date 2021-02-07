@@ -9,18 +9,119 @@
         $connection = new Database();
         $item_ids = $this->getItemsByType($connection);
 
-       
-        $this->getItemsByAttributes($connection, $item_ids);
+        $item_ids = $this->getItemsByAttributes($connection, $item_ids);
+        if (isset($item_ids) && count($item_ids) != 0){
+            
+            $image_data = $this->chooseItem($connection, $item_ids );
 
+            $elements = $this->getElement($connection, $image_data );
+            $image_data['elements'] = $elements;
+
+            $states = $this->getState($connection, $image_data );
+            $image_data['states'] = $states;
+
+            $stats = $this->getStats($connection, $image_data);
+            $image_data['stats'] = $stats;
+
+            $stats = $this->getNames($connection, $image_data);
+            $image_data['name'] = $stats;
+            echo json_encode( $image_data);
+        }else{
+            echo 0;
+        }
+        
+        
+        //print_r( $image_data);
        // echo "<script>console.log(".json_encode($temp_image_datas).");</script>";
-        // insert into image_meta table
-       
+    }
+
+    private function getNames($connection, $image_data){
+        $item_names = array();
+        // shortlist potential names a little
+        $item_rarity = (int)$_POST['gen--rarity'];
+        $sql = "SELECT weapon_names.name, weapon_names.stat_type 
+                FROM weapon_names 
+                INNER JOIN gear_attributes ON weapon_names.stat_rarity=gear_attributes.ID
+                WHERE weapon_names.stat_rarity=$item_rarity";
+        $result = $connection->query($sql);
+        while($row = $result->fetch_assoc()){
+            $result_val[] = $row;
+        }   
+        return $result_val;
+    }
+
+    private function getStats($connection, $image_data){
+        $result_val = array();
+        $sql = "SELECT statkey, statvalue FROM stats WHERE type=0";
+        $result = $connection->query($sql);
+        while($row = $result->fetch_assoc()){
+            $result_val[] = $row;
+       }   
+        return $result_val;
+    }
+
+    private function getState($connection, $image_data ){
+        $item_elements = array();
+        $img_id = $image_data['id'];
+   
+        $sql = "SELECT attribute_id FROM image_attributes WHERE img_id=$img_id";
+        $result = $connection->query($sql);   
+        while($row = $result->fetch_assoc()){ // each attribute by img id
+            $id = $row['attribute_id'];
+            $sql = "SELECT ID FROM gear_attributes WHERE ID=$id AND taxonomy_id=4";/* state */
+            $result2 = $connection->query($sql);     
+            while($row2 = $result2->fetch_assoc()){
+                $item_states[] = $row2['ID'];
+           }
+        }
+        if (!isset($item_states)){
+            return "";
+        }
+        return $item_states;
+    }
+
+    private function getElement($connection, $image_data ){
+        $item_elements = array();
+        $img_id = $image_data['id'];
+   
+        $sql = "SELECT attribute_id FROM image_attributes WHERE img_id=$img_id";
+        $result = $connection->query($sql);    
+        while($row = $result->fetch_assoc()){ // each attribute by img id
+            $id = $row['attribute_id'];
+            $sql = "SELECT ID FROM gear_attributes WHERE ID=$id AND taxonomy_id=3";/* element*/
+            $result2 = $connection->query($sql);    
+            while($row2 = $result2->fetch_assoc()){
+                $item_elements[] = $row2['ID'];
+           }
+        }
+        if (!isset($item_elements)){
+            return "";
+        }
+        return $item_elements;
+    }
+
+    private function chooseItem($connection, $item_ids ){
+
+        $random_index = rand(0, count($item_ids) - 1); 
+        $item_ids = $item_ids[$random_index];
+        $image_data = array();
+        
+        $sql = "SELECT ID, image_url FROM image_meta WHERE ID=$item_ids";
+        $result = $connection->query($sql);
+
+        while($row = $result->fetch_assoc()){
+
+            $image_data['id'] = $row["ID"]; 
+            $image_data['img_url'] = $row["image_url"]; 
+        }
+
+        return $image_data;       
     }
 
     private function getItemsByAttributes($connection, $item_ids){
        
         if ($_POST['gen--attributes'] == "")
-         print_r( $item_ids);
+        // print_r( $item_ids);
             return $item_ids;  
 
         $gen_attributes = $_POST['gen--attributes'];
@@ -41,7 +142,8 @@
                     }
                     $copy_ids[] = $row["img_ID"]; 
                    
-                    print_r($copy_ids);
+                   // print_r($copy_ids);
+                    return $copy_ids;
                 }
                 
             }            
@@ -50,8 +152,10 @@
 
     private function getItemsByType($connection){
         $gen_type = $_POST['gen--type'];
+
         $gen_sub_type = "";
         $img_ids_return = array();
+        $img_ids_ = array();
         if (isset($_POST['gen--sub_type'])){$gen_sub_type = $_POST['gen--sub_type'];}
         // get by type and subtype
         $sql = "SELECT img_ID FROM image_attributes WHERE attribute_id=$gen_type";
@@ -76,6 +180,7 @@
                 }   
             }
         }
+
         // rarity
         $rarity = $_POST['gen--rarity'];
         foreach($img_ids_ as $img_id_rarity){

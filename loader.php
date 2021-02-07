@@ -8,7 +8,7 @@ if ($_SERVER['HTTP_HOST'] != "itemtool.local"){
     define('PASSWORD', 'cx7y%a29FI%U3#5L');
 }else{
     define('SERVER', 'localhost');
-    define('DATABASE', 'item-tool');
+    define('DATABASE', 'item-tool_dev');
     define('USER', 'root');
     define('PASSWORD', '');
 }
