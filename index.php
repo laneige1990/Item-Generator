@@ -45,12 +45,16 @@
         </div>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#data-entry" role="tab"
+                <a class="nav-link active" id="data_entry-tab" data-toggle="tab" href="#data-entry" role="tab"
                     aria-controls="data-entry" aria-selected="true">Data Entry</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#item-generation" role="tab"
                     aria-controls="item-generation" aria-selected="false">Item Generation</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="view-tab" data-toggle="tab" href="#item-view" role="tab"
+                    aria-controls="item-view" aria-selected="false">Item View</a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -644,10 +648,18 @@
                                 </ul>
                             </div>
                     </div>
+            </div>
+            <div class="tab-pane fade" id="item-view" role="tabpanel" aria-labelledby="item-view">
+                <div class="row mb-3 mt-3">
+                    <div class="col">
+                        <button id="view_load" type="button"
+                            value="load" class="btn btn-primary btn-block">Load</button>
+                        <table id="item_data"></table>
+                    </div>
                 </div>
             </div>
-
         </div>
+    </div>
 
         <footer class="my-5 pt-5 text-muted text-center text-small">
 
@@ -682,6 +694,7 @@
     </script>
     <script src="assets/js/data-entry.js"></script>
     <script src="assets/js/generation-handler.js"></script>
+    <script src="assets/js/data-load.js"></script>
 </body>
 
 </html>

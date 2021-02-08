@@ -1,11 +1,7 @@
 <?php
  class Item{
 
-    public function __construct(){
-        $this->potentialImages();
-    }
-
-    private function potentialImages(){
+    public function potentialImages(){
         $connection = new Database();
         $item_ids = $this->getItemsByType($connection);
 
@@ -20,7 +16,7 @@
             $states = $this->getState($connection, $image_data );
             $image_data['states'] = $states;
 
-            $stats = $this->getStats($connection, $image_data);
+            $stats = $this->getStats($connection);
             $image_data['stats'] = $stats;
 
             $stats = $this->getNames($connection, $image_data);
@@ -50,7 +46,7 @@
         return $result_val;
     }
 
-    private function getStats($connection, $image_data){
+    private function getStats($connection){
         $result_val = array();
         $sql = "SELECT statkey, statvalue FROM stats WHERE type=0";
         $result = $connection->query($sql);
@@ -60,9 +56,9 @@
         return $result_val;
     }
 
-    private function getState($connection, $image_data ){
-        $item_elements = array();
-        $img_id = $image_data['id'];
+    public function getState($connection, $image_data ){
+        $item_states = array();
+        $img_id = $image_data['ID'];
    
         $sql = "SELECT attribute_id FROM image_attributes WHERE img_id=$img_id";
         $result = $connection->query($sql);   
@@ -80,9 +76,10 @@
         return $item_states;
     }
 
-    private function getElement($connection, $image_data ){
+    public function getElement($connection, $image_data ){
         $item_elements = array();
-        $img_id = $image_data['id'];
+
+        $img_id = $image_data['ID'];
    
         $sql = "SELECT attribute_id FROM image_attributes WHERE img_id=$img_id";
         $result = $connection->query($sql);    
@@ -111,7 +108,7 @@
 
         while($row = $result->fetch_assoc()){
 
-            $image_data['id'] = $row["ID"]; 
+            $image_data['ID'] = $row["ID"]; 
             $image_data['img_url'] = $row["image_url"]; 
         }
 

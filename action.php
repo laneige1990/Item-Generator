@@ -1,9 +1,14 @@
 <?php
 require_once('loader.php'); 
 // move to ajax call
-if (isset($_GET['r'])){
+if ($_GET['r'] == "gen"){
     require_once('models/item.php');
-    new Item();
+    $item = new Item();
+    $item->potentialImages();
+//    die(print_r($_POST));
+}elseif ($_GET['r'] == "data"){
+    require_once('models/data.php');
+    new Data();
 //    die(print_r($_POST));
 }else{
     // register image
