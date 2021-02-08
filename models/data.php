@@ -45,7 +45,7 @@
                     FROM gear_attributes 
                     WHERE ID=$attribute_id AND taxonomy_id IN (" . implode(',', $taxonomy) . ")";
             $result2 = $connection->query($sql);
-            while($row2 = $result2->fetch_assoc()){
+            while($row2 = $result2->fetch_row()){
                 return $row2;
             }
         }
