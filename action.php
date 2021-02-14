@@ -8,7 +8,12 @@ if ($_GET['r'] == "gen"){
 //    die(print_r($_POST));
 }elseif ($_GET['r'] == "data"){
     require_once('models/data.php');
-    new Data();
+    $data = new Data();
+    $data->getDataObject();
+}elseif ($_GET['r'] == "delete"){
+    require_once('models/data.php');
+    $data = new Data();
+    $data->deleteItem($_GET['id']);
 //    die(print_r($_POST));
 }else{
     // register image
